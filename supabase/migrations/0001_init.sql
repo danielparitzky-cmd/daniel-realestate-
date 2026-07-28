@@ -196,10 +196,18 @@ alter default privileges in schema public grant all on sequences to authenticate
 -- ✂ החיתוך של anon — כולל טבלאות עתידיות
 revoke all on all tables    in schema public from anon;
 revoke all on all sequences in schema public from anon;
-revoke all on all functions in schema public from anon;
 alter default privileges in schema public revoke all on tables    from anon;
 alter default privileges in schema public revoke all on sequences from anon;
+
+-- פונקציות: ל-PUBLIC יש EXECUTE כברירת מחדל, ו-anon יורש ממנו.
+-- חותכים משניהם, ואז מעניקים במפורש רק את מה שצריך.
+revoke all on all functions in schema public from public;
+revoke all on all functions in schema public from anon;
+alter default privileges in schema public revoke all on functions from public;
 alter default privileges in schema public revoke all on functions from anon;
+
+-- set_updated_at (נוצרה למעלה) — נדרשת ל-admin עבור הטריגרים
+grant execute on all functions in schema public to authenticated;
 
 -- ============================================================================
 -- 5. RPC — הגישה היחידה של הדף הציבורי /s/:token
