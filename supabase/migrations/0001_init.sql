@@ -287,6 +287,11 @@ drop policy if exists "property_images_auth_delete" on storage.objects;
 create policy "property_images_auth_delete" on storage.objects for delete to authenticated
   using (bucket_id = 'property-images');
 
+-- קריאה ל-authenticated בלבד — ובכוונה.
+-- ה-bucket ציבורי, כך ש-/storage/v1/object/public/... מגיש תמונות בלי RLS.
+-- policy של select ל-public היה מוסיף גם יכולת LIST: כל מי שמחזיק את ה-anon key
+-- (שנמצא בקוד הקליינט) היה יכול לשלוף רשימה של כל תמונות כל הנכסים, גם כאלה
+-- שמעולם לא שותפו. זה היה עוקף את מודל לינק השיתוף.
 drop policy if exists "property_images_public_read" on storage.objects;
-create policy "property_images_public_read" on storage.objects for select to public
+create policy "property_images_auth_read" on storage.objects for select to authenticated
   using (bucket_id = 'property-images');

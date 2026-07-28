@@ -58,13 +58,15 @@ select
   coalesce(string_agg(id || ' public=' || public::text, ', '), 'MISSING') as details
 from storage.buckets where id = 'property-images';
 
+-- שום policy על storage.objects לא נגיש ל-anon/public — כולל SELECT.
+-- SELECT ציבורי היה מאפשר LIST של כל הקבצים ב-bucket לכל מי שיש לו את ה-anon key.
+-- הגשת התמונות עצמן לא תלויה ב-policy: ה-bucket ציבורי.
 select
-  'no anon/public write policy on storage.objects' as check_name,
-  count(*) = 0                                     as ok,
-  coalesce(string_agg(policyname, ', '), '—')      as offending_policies
+  'no anon/public policy of any kind on storage.objects' as check_name,
+  count(*) = 0                                           as ok,
+  coalesce(string_agg(policyname || ':' || cmd, ', '), '—') as offending_policies
 from pg_policies
 where schemaname = 'storage' and tablename = 'objects'
-  and cmd in ('INSERT', 'UPDATE', 'DELETE')
   and (roles @> '{anon}' or roles @> '{public}');
 
 -- 7. טוקן השיתוף הוא 128-bit
