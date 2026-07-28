@@ -1,0 +1,49 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Assistant', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* פלטת תכלת — לבן + תכלת, בהיר ונקי */
+  --color-brand-50: #f2fafd;
+  --color-brand-100: #e8f4fa;
+  --color-brand-200: #b3e0f2;
+  --color-brand-300: #8acfea;
+  --color-brand-400: #66bde1;
+  --color-brand-500: #4aa8d8;
+  --color-brand-600: #3a8cba;
+  --color-brand-700: #2e7096;
+  --color-brand-800: #245876;
+  --color-brand-900: #1b4159;
+
+  /* צבעי סטטוס לקוח — חייבים להיות זהים בכל מקום שהלקוח מופיע */
+  --color-status-inactive: #9ca3af;
+  --color-status-inactive-bg: #f3f4f6;
+  --color-status-active: #86efac;
+  --color-status-active-bg: #f0fdf4;
+  --color-status-closing: #fde047;
+  --color-status-closing-bg: #fefce8;
+  --color-status-closed: #c084fc;
+  --color-status-closed-bg: #faf5ff;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-brand-100 font-sans text-slate-800 antialiased;
+    margin: 0;
+    min-height: 100dvh;
+  }
+
+  /* מספרים וטלפונים נשארים LTR בתוך טקסט עברי */
+  .ltr-nums {
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+
+  :focus-visible {
+    @apply outline-brand-500 outline-2 outline-offset-2;
+  }
+}
