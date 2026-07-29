@@ -32,6 +32,24 @@ export const router = createBrowserRouter([
             }),
           },
           {
+            path: 'properties/new',
+            lazy: async () => ({
+              Component: (await import('./app/properties/PropertyNewPage')).default,
+            }),
+          },
+          {
+            path: 'properties/:id',
+            lazy: async () => ({
+              Component: (await import('./app/properties/PropertyDetail')).default,
+            }),
+          },
+          {
+            path: 'properties/:id/edit',
+            lazy: async () => ({
+              Component: (await import('./app/properties/PropertyEditPage')).default,
+            }),
+          },
+          {
             path: 'buyers',
             lazy: async () => ({ Component: (await import('./app/buyers/BuyersTab')).default }),
           },

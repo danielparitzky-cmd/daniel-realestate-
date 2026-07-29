@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import type { Database } from './database.types'
 
 const url = import.meta.env.VITE_SUPABASE_URL
 const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
@@ -13,7 +14,7 @@ export const isSupabaseConfigured = Boolean(
 
 // ערכי placeholder רק כדי ש-createClient לא יזרוק בזמן טעינת המודול.
 // אף קריאה לא יוצאת בפועל כשה-app במצב "לא מוגדר".
-export const supabase = createClient(url || 'http://localhost:54321', anonKey || 'placeholder', {
+export const supabase = createClient<Database>(url || 'http://localhost:54321', anonKey || 'placeholder', {
   auth: {
     persistSession: true,
     autoRefreshToken: true,
@@ -21,10 +22,15 @@ export const supabase = createClient(url || 'http://localhost:54321', anonKey ||
   },
 })
 
-/** URL ציבורי לתמונה ב-bucket property-images, עם טרנספורמציה לגודל המבוקש. */
-export function imageUrl(storagePath: string, width = 800, quality = 70): string {
-  const { data } = supabase.storage.from('property-images').getPublicUrl(storagePath, {
-    transform: { width, quality, resize: 'contain' },
-  })
+/**
+ * URL ציבורי לתמונה ב-bucket property-images.
+ *
+ * Supabase Image Transformation (?width=&quality=) זמין רק ב-Pro ומעלה,
+ * והפרויקט על free — שם ה-render endpoint מחזיר שגיאה. לכן מגישים את הקובץ כמו שהוא.
+ * זה בסדר: התמונות כבר נדחסות בדפדפן לפני ההעלאה (~300KB, עד 1600px).
+ * אם תשדרג ל-Pro, החזר כאן את אופציית transform.
+ */
+export function imageUrl(storagePath: string): string {
+  const { data } = supabase.storage.from('property-images').getPublicUrl(storagePath)
   return data.publicUrl
 }
