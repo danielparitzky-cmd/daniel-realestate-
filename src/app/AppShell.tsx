@@ -31,7 +31,9 @@ export default function AppShell() {
 
   return (
     <div className="min-h-dvh bg-brand-100">
-      <header className="sticky top-0 z-20 border-b border-brand-200/70 bg-white/85 backdrop-blur">
+      {/* pt של safe-area: כשמותקן במסך הבית התוכן נמתח מתחת לשעון ולמגרעת,
+          ובלי זה ההדר יושב מתחת לפס הסטטוס. בדפדפן רגיל הערך 0 ואין שינוי. */}
+      <header className="sticky top-0 z-20 border-b border-brand-200/70 bg-white/85 pt-[env(safe-area-inset-top)] backdrop-blur">
         <div className="mx-auto flex h-14 max-w-4xl items-center gap-3 px-4">
           <Link
             to="/"
