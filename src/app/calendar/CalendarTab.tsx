@@ -71,6 +71,7 @@ export default function CalendarTab() {
         isPending={isPending}
         isPaused={isPaused}
         error={error}
+        hasData={buyers != null}
         onRetry={() => void refetch()}
         loadingLabel="טוען לוח שנה…"
       />

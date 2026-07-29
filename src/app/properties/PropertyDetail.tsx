@@ -36,7 +36,7 @@ export default function PropertyDetail() {
   const updateProperty = useUpdateProperty()
   const deleteProperty = useDeleteProperty()
 
-  if (isPending || isPaused || error) {
+  if (!property && (isPending || isPaused || error)) {
     return (
       <QueryState
         isPending={isPending}

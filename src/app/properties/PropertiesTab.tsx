@@ -54,6 +54,7 @@ export default function PropertiesTab() {
         isPending={isPending}
         isPaused={isPaused}
         error={error}
+        hasData={properties != null}
         onRetry={() => void refetch()}
         loadingLabel="טוען נכסים…"
       />

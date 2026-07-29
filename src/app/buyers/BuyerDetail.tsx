@@ -50,7 +50,7 @@ export default function BuyerDetail() {
     return (properties ?? []).filter((p) => !linked.has(p.id))
   }, [properties, wishlist])
 
-  if (isPending || isPaused || error) {
+  if (!buyer && (isPending || isPaused || error)) {
     return (
       <QueryState
         isPending={isPending}

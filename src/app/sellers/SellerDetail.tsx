@@ -40,7 +40,7 @@ export default function SellerDetail() {
     [properties, id],
   )
 
-  if (isPending || isPaused || error) {
+  if (!seller && (isPending || isPaused || error)) {
     return (
       <QueryState
         isPending={isPending}

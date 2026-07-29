@@ -12,7 +12,7 @@ export default function PropertyEditPage() {
   const { data: property, isPending, isPaused, error, refetch } = useProperty(id)
   const updateProperty = useUpdateProperty()
 
-  if (isPending || isPaused || error) {
+  if (!property && (isPending || isPaused || error)) {
     return (
       <QueryState
         isPending={isPending}

@@ -69,6 +69,7 @@ export default function SellersTab() {
         isPending={isPending}
         isPaused={isPaused}
         error={error}
+        hasData={sellers != null}
         onRetry={() => void refetch()}
         loadingLabel="טוען מוכרים…"
       />
