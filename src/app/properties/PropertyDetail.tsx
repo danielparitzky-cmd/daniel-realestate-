@@ -15,6 +15,9 @@ import { QueryState } from '../../components/ui/QueryState'
 import { ChevronIcon, TrashIcon } from '../../components/icons'
 import { ImageManager } from './ImageManager'
 import { EditableText } from './EditableText'
+import { InterestedBuyers } from './InterestedBuyers'
+import { PropertySeller } from './PropertySeller'
+import { ShareLinkSection } from './ShareLinkSection'
 
 function Spec({ label, value }: { label: string; value: string | number | null | undefined }) {
   if (value == null || value === '') return null
@@ -23,16 +26,6 @@ function Spec({ label, value }: { label: string; value: string | number | null |
       <dt className="text-xs text-slate-500">{label}</dt>
       <dd className="mt-0.5 text-sm font-bold text-slate-800">{value}</dd>
     </div>
-  )
-}
-
-/** מקום שמור למה שנבנה בפאזה מאוחרת יותר — כדי שהמבנה של המסך יהיה ברור כבר עכשיו. */
-function ComingSoon({ title, phase }: { title: string; phase: string }) {
-  return (
-    <Card className="p-5">
-      <h2 className="mb-2 text-sm font-bold text-brand-700">{title}</h2>
-      <p className="text-sm text-slate-400">נבנה ב{phase}.</p>
-    </Card>
   )
 }
 
@@ -177,9 +170,9 @@ export default function PropertyDetail() {
         />
       </Card>
 
-      <ComingSoon title="מוכר" phase="פאזה 3" />
-      <ComingSoon title="לקוחות מתעניינים" phase="פאזה 2" />
-      <ComingSoon title="לינק שיתוף" phase="פאזה 5" />
+      <PropertySeller propertyId={property.id} sellerId={property.seller_id} />
+      <InterestedBuyers propertyId={property.id} />
+      <ShareLinkSection propertyId={property.id} />
 
       {updateProperty.error && (
         <p className="rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700 ring-1 ring-red-200">

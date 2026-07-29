@@ -54,8 +54,16 @@ export const router = createBrowserRouter([
             lazy: async () => ({ Component: (await import('./app/buyers/BuyersTab')).default }),
           },
           {
+            path: 'buyers/:id',
+            lazy: async () => ({ Component: (await import('./app/buyers/BuyerDetail')).default }),
+          },
+          {
             path: 'sellers',
             lazy: async () => ({ Component: (await import('./app/sellers/SellersTab')).default }),
+          },
+          {
+            path: 'sellers/:id',
+            lazy: async () => ({ Component: (await import('./app/sellers/SellerDetail')).default }),
           },
           {
             path: 'calendar',
