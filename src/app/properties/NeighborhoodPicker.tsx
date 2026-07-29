@@ -83,7 +83,7 @@ export function NeighborhoodPicker({
         onChange={(e) => setQuery(e.target.value)}
         placeholder={trimmedCity ? `שכונה ב${trimmedCity}…` : 'מלא קודם עיר'}
         disabled={!trimmedCity}
-        className="w-full rounded-xl bg-white py-2.5 pe-3.5 ps-10 text-sm text-slate-800 ring-1 ring-brand-200 placeholder:text-slate-400 focus:ring-2 focus:ring-brand-500 focus:outline-none disabled:bg-slate-50 disabled:text-slate-400"
+        className="w-full rounded-xl bg-white py-3 pe-3.5 ps-10 text-base text-slate-800 ring-1 ring-brand-200 placeholder:text-slate-400 focus:ring-2 focus:ring-brand-500 focus:outline-none disabled:bg-slate-50 disabled:text-slate-400 sm:py-2.5 sm:text-sm"
       />
 
       {open && trimmedCity && (matches.length > 0 || canCreate) && (

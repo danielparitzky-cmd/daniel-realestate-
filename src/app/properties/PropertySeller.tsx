@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useSellers, useSetPropertySeller } from '../../lib/queries/sellers'
 import { Card } from '../../components/ui/Card'
+import { IconButton } from '../../components/ui/IconButton'
 import { EntityPicker } from '../../components/EntityPicker'
 import { TrashIcon } from '../../components/icons'
 
@@ -45,7 +46,7 @@ export function PropertySeller({
         <p className="py-4 text-center text-sm text-slate-400">אין מוכר משויך.</p>
       ) : (
         <div className="flex items-center gap-3 rounded-xl bg-brand-50 px-4 py-3">
-          <Link to={`/sellers/${seller.id}`} className="min-w-0 flex-1">
+          <Link to={`/sellers/${seller.id}`} className="flex min-h-11 min-w-0 flex-1 flex-col justify-center">
             <span className="block truncate text-sm font-semibold text-slate-800">
               {seller.full_name}
             </span>
@@ -53,15 +54,13 @@ export function PropertySeller({
               {seller.phone || '—'}
             </span>
           </Link>
-          <button
-            type="button"
-            title="בטל שיוך"
+          <IconButton
+            label="בטל שיוך"
+            tone="danger"
             onClick={() => setPropertySeller.mutate({ propertyId, sellerId: null })}
-            className="shrink-0 rounded-lg p-1.5 text-slate-400 hover:bg-white hover:text-red-600"
           >
-            <TrashIcon className="size-4" />
-            <span className="sr-only">בטל שיוך</span>
-          </button>
+            <TrashIcon className="size-4.5" />
+          </IconButton>
         </div>
       )}
 

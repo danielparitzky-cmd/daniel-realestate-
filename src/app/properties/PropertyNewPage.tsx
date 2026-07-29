@@ -1,7 +1,7 @@
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useCreateProperty } from '../../lib/queries/properties'
 import { useSellers } from '../../lib/queries/sellers'
-import { ChevronIcon } from '../../components/icons'
+import { BackLink } from '../../components/BackLink'
 import { PropertyForm } from './PropertyForm'
 
 export default function PropertyNewPage() {
@@ -16,13 +16,9 @@ export default function PropertyNewPage() {
 
   return (
     <div className="space-y-4">
-      <Link
-        to={seller ? `/sellers/${seller.id}` : '/properties'}
-        className="inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:text-brand-700"
-      >
-        <ChevronIcon className="size-4 rotate-180" />
+      <BackLink to={seller ? `/sellers/${seller.id}` : '/properties'}>
         {seller ? `חזרה ל${seller.full_name}` : 'כל הנכסים'}
-      </Link>
+      </BackLink>
 
       <h1 className="text-2xl font-bold text-slate-800">נכס חדש</h1>
 

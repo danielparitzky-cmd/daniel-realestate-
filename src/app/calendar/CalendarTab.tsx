@@ -83,7 +83,7 @@ export default function CalendarTab() {
               <button
                 type="button"
                 onClick={() => shiftMonth(-1)}
-                className="rounded-lg p-1.5 text-slate-500 hover:bg-brand-50 hover:text-brand-700"
+                className="flex size-11 shrink-0 items-center justify-center rounded-lg text-slate-500 hover:bg-brand-50 hover:text-brand-700 sm:size-9"
               >
                 <ChevronIcon className="size-5 rotate-180" />
                 <span className="sr-only">חודש קודם</span>
@@ -96,7 +96,7 @@ export default function CalendarTab() {
               <button
                 type="button"
                 onClick={() => shiftMonth(1)}
-                className="rounded-lg p-1.5 text-slate-500 hover:bg-brand-50 hover:text-brand-700"
+                className="flex size-11 shrink-0 items-center justify-center rounded-lg text-slate-500 hover:bg-brand-50 hover:text-brand-700 sm:size-9"
               >
                 <ChevronIcon className="size-5" />
                 <span className="sr-only">חודש הבא</span>
@@ -154,26 +154,41 @@ export default function CalendarTab() {
                       {day.getDate()}
                     </span>
 
-                    {dayBuyers.slice(0, 2).map((buyer) => (
-                      <span
-                        key={buyer.id}
-                        title={buyer.full_name}
-                        className={cn(
-                          'truncate rounded px-1 py-0.5 text-[10px] font-semibold sm:text-[11px]',
-                          buyer.callback_done
-                            ? 'bg-green-100 text-green-800'
-                            : 'bg-red-100 text-red-800',
-                        )}
-                      >
-                        {buyer.full_name}
-                      </span>
-                    ))}
+                    {/* ברוחב טלפון תא הוא ~49px ושם עברי נחתך אחרי ארבע אותיות,
+                        אז במובייל מסמנים בנקודות ומקישים על היום לפרטים המלאים */}
+                    <span className="mt-auto flex flex-wrap gap-1 sm:hidden">
+                      {dayBuyers.slice(0, 4).map((buyer) => (
+                        <span
+                          key={buyer.id}
+                          className={cn(
+                            'size-2 rounded-full',
+                            buyer.callback_done ? 'bg-green-500' : 'bg-red-500',
+                          )}
+                        />
+                      ))}
+                    </span>
 
-                    {dayBuyers.length > 2 && (
-                      <span className="px-1 text-[10px] font-semibold text-slate-500">
-                        +{dayBuyers.length - 2}
-                      </span>
-                    )}
+                    <span className="hidden flex-col gap-0.5 sm:flex">
+                      {dayBuyers.slice(0, 2).map((buyer) => (
+                        <span
+                          key={buyer.id}
+                          title={buyer.full_name}
+                          className={cn(
+                            'truncate rounded px-1 py-0.5 text-[11px] font-semibold',
+                            buyer.callback_done
+                              ? 'bg-green-100 text-green-800'
+                              : 'bg-red-100 text-red-800',
+                          )}
+                        >
+                          {buyer.full_name}
+                        </span>
+                      ))}
+                      {dayBuyers.length > 2 && (
+                        <span className="px-1 text-[10px] font-semibold text-slate-500">
+                          +{dayBuyers.length - 2}
+                        </span>
+                      )}
+                    </span>
                   </button>
                 )
               })}
@@ -199,7 +214,7 @@ export default function CalendarTab() {
                         : 'bg-red-50 text-red-900 ring-red-200',
                     )}
                   >
-                    <Link to={`/buyers/${buyer.id}`} className="min-w-0 flex-1">
+                    <Link to={`/buyers/${buyer.id}`} className="flex min-h-11 min-w-0 flex-1 flex-col justify-center">
                       <span className="block truncate font-bold">{buyer.full_name}</span>
                       <span className="ltr-nums block truncate text-xs opacity-75">
                         {buyer.phone || '—'}
@@ -209,6 +224,7 @@ export default function CalendarTab() {
                     <Button
                       size="sm"
                       variant="secondary"
+                      className="w-full sm:w-auto"
                       loading={updateBuyer.isPending}
                       onClick={() =>
                         // הקוביה נשארת על היום שנקבע — הסימון רק מחליף אדום/ירוק

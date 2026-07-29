@@ -113,12 +113,12 @@ function Checkbox({
   onChange: (next: boolean) => void
 }) {
   return (
-    <label className="flex cursor-pointer items-center gap-2.5 rounded-xl bg-white px-3.5 py-2.5 text-sm font-semibold text-slate-700 ring-1 ring-brand-200">
+    <label className="flex min-h-12 cursor-pointer items-center gap-3 rounded-xl bg-white px-3.5 text-base font-semibold text-slate-700 ring-1 ring-brand-200 sm:min-h-0 sm:py-2.5 sm:text-sm">
       <input
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
-        className="size-4 accent-brand-500"
+        className="size-5 accent-brand-500 sm:size-4"
       />
       {label}
     </label>
@@ -389,8 +389,9 @@ export function PropertyForm({
         </p>
       )}
 
-      <div className="sticky bottom-0 flex gap-3 border-t border-brand-200/70 bg-brand-100/90 py-3 backdrop-blur">
-        <Button type="submit" size="lg" loading={submitting}>
+      {/* במובייל יושב מעל סרגל הניווט התחתון, לא מתחתיו */}
+      <div className="sticky bottom-[calc(4rem+env(safe-area-inset-bottom))] flex gap-3 border-t border-brand-200/70 bg-brand-100/90 py-3 backdrop-blur sm:bottom-0">
+        <Button type="submit" size="lg" loading={submitting} className="flex-1 sm:flex-none">
           {submitLabel}
         </Button>
         <Button type="button" variant="secondary" size="lg" onClick={onCancel}>

@@ -11,9 +11,11 @@ import { useProperties } from '../../lib/queries/properties'
 import { formatPrice } from '../../lib/format'
 import { Card, EmptyState } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
+import { IconButton } from '../../components/ui/IconButton'
 import { QueryState } from '../../components/ui/QueryState'
 import { EntityPicker } from '../../components/EntityPicker'
-import { ChevronIcon, PlusIcon, TrashIcon } from '../../components/icons'
+import { PlusIcon, TrashIcon } from '../../components/icons'
+import { BackLink } from '../../components/BackLink'
 import { EditableText } from '../properties/EditableText'
 
 export default function SellerDetail() {
@@ -69,13 +71,7 @@ export default function SellerDetail() {
 
   return (
     <div className="space-y-4">
-      <Link
-        to="/sellers"
-        className="inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:text-brand-700"
-      >
-        <ChevronIcon className="size-4 rotate-180" />
-        כל המוכרים
-      </Link>
+      <BackLink to="/sellers">כל המוכרים</BackLink>
 
       <Card className="p-5">
         <div className="flex flex-wrap items-start gap-3">
@@ -97,7 +93,7 @@ export default function SellerDetail() {
                 const next = e.target.value.trim() || null
                 if (next !== seller.phone) save({ phone: next })
               }}
-              className="ltr-nums mt-1 w-full rounded-lg border-0 bg-transparent px-0 text-start text-sm text-slate-500 focus:bg-brand-50 focus:px-2 focus:outline-none"
+              className="ltr-nums mt-1 w-full rounded-lg border-0 bg-transparent px-0 text-start text-base text-slate-500 focus:bg-brand-50 focus:px-2 focus:outline-none sm:text-sm"
             />
           </div>
 
@@ -179,7 +175,7 @@ export default function SellerDetail() {
                 key={property.id}
                 className="flex items-center gap-3 rounded-xl bg-brand-50 px-4 py-3"
               >
-                <Link to={`/properties/${property.id}`} className="min-w-0 flex-1">
+                <Link to={`/properties/${property.id}`} className="flex min-h-11 min-w-0 flex-1 flex-col justify-center">
                   <span className="block truncate text-sm font-semibold text-slate-800">
                     {property.address || 'ללא כתובת'}
                   </span>
@@ -190,15 +186,13 @@ export default function SellerDetail() {
                 <span className="shrink-0 text-sm font-bold text-brand-600">
                   {formatPrice(property.price)}
                 </span>
-                <button
-                  type="button"
-                  title="בטל שיוך"
+                <IconButton
+                  label="בטל שיוך"
+                  tone="danger"
                   onClick={() => setPropertySeller.mutate({ propertyId: property.id, sellerId: null })}
-                  className="shrink-0 rounded-lg p-1.5 text-slate-400 hover:bg-white hover:text-red-600"
                 >
-                  <TrashIcon className="size-4" />
-                  <span className="sr-only">בטל שיוך</span>
-                </button>
+                  <TrashIcon className="size-4.5" />
+                </IconButton>
               </li>
             ))}
           </ul>

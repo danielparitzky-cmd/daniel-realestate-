@@ -13,10 +13,12 @@ import { BUYER_STATUS, type BuyerStatus } from '../../lib/constants'
 import { formatDate, formatDateTime, formatPrice, toDateKey } from '../../lib/format'
 import { Card, EmptyState } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
+import { IconButton } from '../../components/ui/IconButton'
 import { Input, Textarea } from '../../components/ui/Input'
 import { QueryState } from '../../components/ui/QueryState'
 import { EntityPicker } from '../../components/EntityPicker'
-import { ChevronIcon, TrashIcon } from '../../components/icons'
+import { TrashIcon } from '../../components/icons'
+import { BackLink } from '../../components/BackLink'
 import { cn } from '../../lib/cn'
 
 export default function BuyerDetail() {
@@ -81,13 +83,7 @@ export default function BuyerDetail() {
 
   return (
     <div className="space-y-4">
-      <Link
-        to="/buyers"
-        className="inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:text-brand-700"
-      >
-        <ChevronIcon className="size-4 rotate-180" />
-        כל הלקוחות
-      </Link>
+      <BackLink to="/buyers">כל הלקוחות</BackLink>
 
       <Card className="p-5">
         <div className="flex flex-wrap items-start gap-3">
@@ -109,7 +105,7 @@ export default function BuyerDetail() {
                 const next = e.target.value.trim() || null
                 if (next !== buyer.phone) save({ phone: next })
               }}
-              className="ltr-nums mt-1 w-full rounded-lg border-0 bg-transparent px-0 text-start text-sm text-slate-500 focus:bg-brand-50 focus:px-2 focus:outline-none"
+              className="ltr-nums mt-1 w-full rounded-lg border-0 bg-transparent px-0 text-start text-base text-slate-500 focus:bg-brand-50 focus:px-2 focus:outline-none sm:text-sm"
             />
           </div>
 
@@ -140,7 +136,7 @@ export default function BuyerDetail() {
                   type="button"
                   onClick={() => save({ status: key })}
                   className={cn(
-                    'inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-semibold ring-1 transition-all',
+                    'inline-flex min-h-11 items-center gap-1.5 rounded-full px-4 text-sm font-semibold ring-1 transition-all sm:min-h-0 sm:px-3 sm:py-1.5 sm:text-xs',
                     active ? `${s.chip} ring-2` : 'bg-white text-slate-500 ring-brand-200',
                   )}
                 >
@@ -300,7 +296,7 @@ export default function BuyerDetail() {
                 key={property.id}
                 className="flex items-center gap-3 rounded-xl bg-brand-50 px-4 py-3"
               >
-                <Link to={`/properties/${property.id}`} className="min-w-0 flex-1">
+                <Link to={`/properties/${property.id}`} className="flex min-h-11 min-w-0 flex-1 flex-col justify-center">
                   <span className="block truncate text-sm font-semibold text-slate-800">
                     {property.address || 'ללא כתובת'}
                   </span>
@@ -311,17 +307,15 @@ export default function BuyerDetail() {
                 <span className="shrink-0 text-sm font-bold text-brand-600">
                   {formatPrice(property.price)}
                 </span>
-                <button
-                  type="button"
-                  title="הסר מהווישליסט"
+                <IconButton
+                  label="הסר מהווישליסט"
+                  tone="danger"
                   onClick={() =>
                     removeInterest.mutate({ buyerId: buyer.id, propertyId: property.id })
                   }
-                  className="shrink-0 rounded-lg p-1.5 text-slate-400 hover:bg-white hover:text-red-600"
                 >
-                  <TrashIcon className="size-4" />
-                  <span className="sr-only">הסר מהווישליסט</span>
-                </button>
+                  <TrashIcon className="size-4.5" />
+                </IconButton>
               </li>
             ))}
           </ul>

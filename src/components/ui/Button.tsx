@@ -11,10 +11,11 @@ const VARIANTS: Record<Variant, string> = {
   danger: 'bg-red-500 text-white hover:bg-red-600 shadow-sm',
 }
 
+// גבוה יותר במובייל: אצבע צריכה שטח שסמן עכבר לא צריך
 const SIZES: Record<Size, string> = {
-  sm: 'h-8 px-3 text-sm rounded-lg gap-1.5',
-  md: 'h-10 px-4 text-sm rounded-xl gap-2',
-  lg: 'h-12 px-6 text-base rounded-xl gap-2',
+  sm: 'h-11 px-3.5 text-sm rounded-lg gap-1.5 sm:h-8 sm:px-3',
+  md: 'h-12 px-5 text-base rounded-xl gap-2 sm:h-10 sm:px-4 sm:text-sm',
+  lg: 'h-13 px-6 text-base rounded-xl gap-2 sm:h-12',
 }
 
 type Props = ButtonHTMLAttributes<HTMLButtonElement> & {

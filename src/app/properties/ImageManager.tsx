@@ -97,17 +97,15 @@ export function ImageManager({ property }: { property: Property }) {
                   </span>
                 )}
 
-                <div className="absolute inset-x-0 bottom-0 flex justify-end gap-1 bg-gradient-to-t from-black/60 to-transparent p-2">
+                <div className="absolute inset-x-0 bottom-0 flex justify-end gap-1.5 bg-gradient-to-t from-black/60 to-transparent p-2">
                   {!isMain && (
                     <button
                       type="button"
                       title="הפוך לתמונה ראשית"
-                      onClick={() =>
-                        setMain.mutate({ propertyId: property.id, imageId: image.id })
-                      }
-                      className="rounded-lg bg-white/90 p-1.5 text-slate-700 transition-colors hover:bg-white hover:text-brand-600"
+                      onClick={() => setMain.mutate({ propertyId: property.id, imageId: image.id })}
+                      className="flex size-10 items-center justify-center rounded-lg bg-white/90 text-slate-700 transition-colors hover:bg-white hover:text-brand-600 sm:size-8"
                     >
-                      <StarIcon className="size-4" />
+                      <StarIcon className="size-4.5" />
                       <span className="sr-only">הפוך לתמונה ראשית</span>
                     </button>
                   )}
@@ -117,9 +115,9 @@ export function ImageManager({ property }: { property: Property }) {
                     onClick={() => {
                       if (confirm('למחוק את התמונה?')) remove.mutate(image)
                     }}
-                    className="rounded-lg bg-white/90 p-1.5 text-slate-700 transition-colors hover:bg-white hover:text-red-600"
+                    className="flex size-10 items-center justify-center rounded-lg bg-white/90 text-slate-700 transition-colors hover:bg-white hover:text-red-600 sm:size-8"
                   >
-                    <TrashIcon className="size-4" />
+                    <TrashIcon className="size-4.5" />
                     <span className="sr-only">מחק תמונה</span>
                   </button>
                 </div>

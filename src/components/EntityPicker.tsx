@@ -58,7 +58,7 @@ export function EntityPicker({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={searchPlaceholder}
-          className="w-full rounded-lg bg-white py-2 pe-3 ps-10 text-sm text-slate-800 ring-1 ring-brand-200 placeholder:text-slate-400 focus:ring-2 focus:ring-brand-500 focus:outline-none"
+          className="w-full rounded-lg bg-white py-2.5 pe-3 ps-10 text-base text-slate-800 ring-1 ring-brand-200 placeholder:text-slate-400 focus:ring-2 focus:ring-brand-500 focus:outline-none sm:py-2 sm:text-sm"
         />
       </div>
 

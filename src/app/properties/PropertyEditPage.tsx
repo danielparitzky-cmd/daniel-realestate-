@@ -3,7 +3,7 @@ import { useProperty, useUpdateProperty } from '../../lib/queries/properties'
 import { Button } from '../../components/ui/Button'
 import { EmptyState } from '../../components/ui/Card'
 import { QueryState } from '../../components/ui/QueryState'
-import { ChevronIcon } from '../../components/icons'
+import { BackLink } from '../../components/BackLink'
 import { PropertyForm } from './PropertyForm'
 
 export default function PropertyEditPage() {
@@ -38,13 +38,7 @@ export default function PropertyEditPage() {
 
   return (
     <div className="space-y-4">
-      <Link
-        to={`/properties/${property.id}`}
-        className="inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:text-brand-700"
-      >
-        <ChevronIcon className="size-4 rotate-180" />
-        חזרה לנכס
-      </Link>
+      <BackLink to={`/properties/${property.id}`}>חזרה לנכס</BackLink>
 
       <h1 className="text-2xl font-bold text-slate-800">עריכת נכס</h1>
 

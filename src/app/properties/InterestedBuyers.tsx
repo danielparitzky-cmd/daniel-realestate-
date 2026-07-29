@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useBuyers } from '../../lib/queries/buyers'
 import { useAddInterest, useInterests, useRemoveInterest } from '../../lib/queries/interest'
 import { Card } from '../../components/ui/Card'
+import { IconButton } from '../../components/ui/IconButton'
 import { EntityPicker } from '../../components/EntityPicker'
 import { BuyerStatusBadge, BuyerStatusDot } from '../../components/StatusDot'
 import { TrashIcon } from '../../components/icons'
@@ -63,7 +64,7 @@ export function InterestedBuyers({ propertyId }: { propertyId: string }) {
         <ul className="space-y-2">
           {interested.map((buyer) => (
             <li key={buyer.id} className="flex items-center gap-3 rounded-xl bg-brand-50 px-4 py-3">
-              <Link to={`/buyers/${buyer.id}`} className="min-w-0 flex-1">
+              <Link to={`/buyers/${buyer.id}`} className="flex min-h-11 min-w-0 flex-1 flex-col justify-center">
                 <span className="block truncate text-sm font-semibold text-slate-800">
                   {buyer.full_name}
                 </span>
@@ -72,15 +73,13 @@ export function InterestedBuyers({ propertyId }: { propertyId: string }) {
                 </span>
               </Link>
               <BuyerStatusBadge status={buyer.status} />
-              <button
-                type="button"
-                title="הסר מהמתעניינים"
+              <IconButton
+                label="הסר מהמתעניינים"
+                tone="danger"
                 onClick={() => removeInterest.mutate({ buyerId: buyer.id, propertyId })}
-                className="shrink-0 rounded-lg p-1.5 text-slate-400 hover:bg-white hover:text-red-600"
               >
-                <TrashIcon className="size-4" />
-                <span className="sr-only">הסר מהמתעניינים</span>
-              </button>
+                <TrashIcon className="size-4.5" />
+              </IconButton>
             </li>
           ))}
         </ul>

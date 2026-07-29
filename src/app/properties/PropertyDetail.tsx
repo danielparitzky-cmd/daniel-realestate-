@@ -12,7 +12,8 @@ import {
 import { Badge, Card, EmptyState } from '../../components/ui/Card'
 import { Button } from '../../components/ui/Button'
 import { QueryState } from '../../components/ui/QueryState'
-import { ChevronIcon, TrashIcon } from '../../components/icons'
+import { TrashIcon } from '../../components/icons'
+import { BackLink } from '../../components/BackLink'
 import { ImageManager } from './ImageManager'
 import { EditableText } from './EditableText'
 import { InterestedBuyers } from './InterestedBuyers'
@@ -71,13 +72,7 @@ export default function PropertyDetail() {
 
   return (
     <div className="space-y-4">
-      <Link
-        to="/properties"
-        className="inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:text-brand-700"
-      >
-        <ChevronIcon className="size-4 rotate-180" />
-        כל הנכסים
-      </Link>
+      <BackLink to="/properties">כל הנכסים</BackLink>
 
       <Card className="p-5">
         <div className="flex flex-wrap items-start gap-3">
